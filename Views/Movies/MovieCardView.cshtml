@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Movie>
+<!DOCTYPE html>
+<html class=''>
+<head>
+    <link href="~/css/cardstyle.css" rel="stylesheet" />
+</head>
+<body>
+    <p class="intro">Based from <b><a href="#" target="_blank">Shivam Movies Theatre</a></b><p>
+
+        <div class="container">
+
+            @foreach (var item in Model)
+            {
+
+                <div class="movie-card">
+                    <div class="movie-header" style="background:url('@item.ImageURL');background-size:cover"></div>
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#">
+                                <h3 class="movie-title">@item.Name</h3>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Cart</label>
+                                <span><a href="#"><i class="bi bi-cart-check "></i></a></span>
+                            </div>
+                            <div class="info-section">
+                                <label>Details</label>
+                                <span><a href="#"><i class="bi bi-eye "></i></a></span>
+                            </div>
+                            <div class="info-section">
+                                <label>Price</label>
+                                <span class="badge-pill badge-info">@item.Price</span>
+                            </div>
+                            <div class="info-section">
+                                <label>Start Date</label>
+                                <span>@item.StartDate.ToString("dd MMM yy")</span>
+                            </div>
+                            <div class="info-section">
+                                <label>Cinema</label>
+                                <span><img src="@item.Cinema.ImageURL" class="rounded-circle img-thumbnail" style="height:35px;width:35px" /></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+             }
+        </div>
+
+</body>
+</html>
