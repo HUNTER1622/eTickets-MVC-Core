@@ -57,7 +57,7 @@ namespace eTickets
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Movies}/{action=MovieCardView}/{id?}");
+                    pattern: "{controller=Actor}/{action=Create}/{id?}");
             });
             AppDBInitializer.Seed(app);
         }

@@ -10,7 +10,7 @@ namespace eTickets.Data.Services
     {
         List<Actor> GetAllActor();
         Actor GetActorById(int Id);
-        bool AddActor(Actor model);
+        int AddActor(Actor model);
         bool UpdatActor(int Id, Actor model);
         bool DeleteActor(int Id);
     }

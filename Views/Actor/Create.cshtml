@@ -1,0 +1,57 @@
+﻿@model Actor
+
+@{
+    ViewData["Title"] = "Add a new Actor";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>Add a New Actor</p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group text-center">
+                        <img id="profilepic" class="rounded-circle justify-content-sm-around"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="ImageURL"></label>
+                        <input class="form-control" asp-for="ImageURL" />
+                        <span asp-validation-for="ImageURL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Name"></label>
+                        <input class="form-control" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Bio"></label>
+                        <input class="form-control" asp-for="Bio" />
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-danger" as-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        loadImage();
+    })
+    $("#ImageURL").on("change", function () {
+        loadImage();
+        
+    })
+    function loadImage() {
+        var value = document.getElementById('profilepic');
+        value.src = $("#ImageURL").val();
+        $("#profilepic").css({ "height": "200px" })
+    }
+</script>

@@ -1,5 +1,6 @@
 ﻿using eTickets.Data;
 using eTickets.Data.Services;
+using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,27 @@ namespace eTickets.Controllers
         public IActionResult Index()
         {
             return View(sr.GetAllActor());
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Actor model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            sr.AddActor(model);
+            return RedirectToAction(nameof(Index));
+
+        }
+        public IActionResult Details(int id)
+        {
+            var data = sr.GetActorById(id);
+            return View(data);
         }
     }
 }

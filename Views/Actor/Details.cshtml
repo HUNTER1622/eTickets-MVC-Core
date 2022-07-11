@@ -1,0 +1,139 @@
+﻿@model Actor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>@Model.Name</p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                    <div class="form-group text-center">
+                        <img id="profilepic" class="rounded-circle justify-content-sm-around" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="ImageURL"></label>
+                        <input class="form-control" asp-for="ImageURL" readonly />
+                        <span id="VImageURL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Name"></label>
+                        <input class="form-control" asp-for="Name" readonly />
+                        <span id="VName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Bio"></label>
+                        <input class="form-control" asp-for="Bio" readonly />
+                        <span id="VBio" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Edit" class="btn btn-outline-success float-right" id="commonbutton" />
+                        <input type="button" value="Update" class="btn btn-outline-success float-right" id="Update" />
+                        <a class="btn btn-outline-danger" as-action="Index">Show All</a>
+                    </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        loadImage();
+        $("#Update").css({"display":"none"})
+    })
+    $("#ImageURL").on("change", function () {
+        loadImage();
+
+    })
+    function loadImage() {
+        var value = document.getElementById('profilepic');
+        value.src = $("#ImageURL").val();
+        $("#profilepic").css({ "height": "200px" })
+    }
+    function checkImageURL() {
+        var imageurl = $("#ImageURL").val();
+        if (imageurl.length <= 0) {
+            $("#VImageURL").text("Please Enter ImageURL");
+            $("#Update").attr("disabled", true);
+            return false;
+        }
+        else {
+            $("#VImageURL").text("")
+            $("#Update").attr("disabled", false);
+            return true;
+        }
+    }
+    function checkName() {
+        var Name = $("#Name").val();
+        if (Name.length <= 3) {
+            if (Name.length <= 0) {
+                $("#VName").text("Please Enter name");
+                $("#Update").attr("disabled", true);
+                return false;
+
+            }
+            else {
+                $("#VName").text("Name should be graeter then 3 words");
+                $("#Update").attr("disabled", true);
+                return false;
+            }
+        }
+        else {
+            $("#VName").text("");
+            $("#Update").attr("disabled", false);
+            return true;
+        }
+    }
+    function checkBio() {
+        var Bio = $("#Bio").val();
+        if (Bio.length <= 0) {
+            $("#VBio").text("Please Enter bio");
+            $("#Update").attr("disabled", true);
+            return false;
+        }
+        else {
+            $("#VBio").text("");
+            $("#Update").attr("disabled", false);
+            return true;
+        }
+    }
+    $("#ImageURL").on("change", function () {
+        checkImageURL();
+    })
+    $("#Name").on("change", function () {
+        checkName();
+    })
+    $("#Bio").on("change", function () {
+        checkBio();
+    })
+    $("#commonbutton").on("click", function () {
+        $("#ImageURL").attr("readonly", false);
+        $("#Name").attr("readonly", false);
+        $("#Bio").attr("readonly", false);
+        $("#commonbutton").css({ "display": "none" });
+        $("#Update").css({ "display": "block" });
+    })
+    $("#Update").on("click", function () {
+        debugger;
+        if (checkImageURL() & checkName() & checkBio()) {
+            debugger;
+        }
+    })
+
+    //var fd = new FormData();
+    //fd.append('file', input.files[0]);
+
+    //$.ajax({
+    //    url: 'http://example.com/script.php',
+    //    data: fd,
+    //    processData: false,
+    //    contentType: false,
+    //    type: 'POST',
+    //    success: function (data) {
+    //        alert(data);
+    //    }
+    //});
+</script>

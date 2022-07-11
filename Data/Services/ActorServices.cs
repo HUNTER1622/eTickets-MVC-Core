@@ -14,9 +14,11 @@ namespace eTickets.Data.Services
         {
             db = context;
         }
-        public bool AddActor(Actor model)
+        public int AddActor(Actor model)
         {
-            throw new NotImplementedException();
+            db.Actors.Add(model);
+            var result = db.SaveChanges();
+            return result;
         }
 
         public bool DeleteActor(int Id)
@@ -26,7 +28,8 @@ namespace eTickets.Data.Services
 
         public Actor GetActorById(int Id)
         {
-            throw new NotImplementedException();
+            var data = db.Actors.FirstOrDefault(x => x.ActorId == Id);
+            return data;
         }
 
         public List<Actor> GetAllActor()
